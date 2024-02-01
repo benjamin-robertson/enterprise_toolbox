@@ -1,13 +1,14 @@
 # frozen_string_literal: true
+
 require 'open3'
 require 'json'
 require 'socket'
 
 Facter.add(:puppet_enterprise_role) do
-  confine kernel: 'windows'
+  confine kernel: 'Linux'
   setcode do
     # confirm this is a pe
-    if Facter.value(:pe_version).to_s.empty? then
+    if Facter.value(:pe_version).to_s.empty?
       return nil
     end
 
@@ -18,29 +19,27 @@ Facter.add(:puppet_enterprise_role) do
 
       # Populate the hash with value for Primary and Replica
       output.each_line do |line|
-        if line.match(/^Primary: /)
-          results['Primary'] = line.gsub(/^Primary: /, '').lstrip.rstrip
-        elsif line.match(/^Master: /)
-          results['Primary'] = line.gsub(/^Master: /, '').lstrip.rstrip
-        elsif line.match(/^Replica: /)
-          results['Replica'] = line.gsub(/^Replica: /, '').lstrip.rstrip
+        if line.match?(%r{^Primary: })
+          results['Primary'] = line.gsub(%r{^Primary: }, '').lstrip.rstrip
+        elsif line.match?(%r{^Master: })
+          results['Primary'] = line.gsub(%r{^Master: }, '').lstrip.rstrip
+        elsif line.match?(%r{^Replica: })
+          results['Replica'] = line.gsub(%r{^Replica: }, '').lstrip.rstrip
         end
       end
 
       # Compare our hostname to results
-      results.each do |k,v|
+      results.each do |k, v|
         if v.include? hostname
           return k
         end
       end
 
       # If we have not matched, we are probably running on a compiler.
-      if status != 0
-        return "Compiler"
-      end
+      return 'Compiler' unless status != 0
+      'Error getting Puppet Infra Role'
     end
 
-    get_puppet_role()
-
+    get_puppet_role
   end
 end
