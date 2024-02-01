@@ -36,7 +36,7 @@ Facter.add(:puppet_enterprise_role) do
       end
 
       # If we have not matched, we are probably running on a compiler.
-      return 'Compiler' unless status != 0
+      return 'Compiler' unless status == 0
       'Error getting Puppet Infra Role'
     end
 
