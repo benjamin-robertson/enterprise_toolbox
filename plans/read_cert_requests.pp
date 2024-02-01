@@ -29,5 +29,7 @@ plan enterprise_toolbox::read_cert_requests (
     $pe_target = $pe_status_results
   }
   out::message("pe_target is ${pe_target}")
+  $pe_target_certname = $pe_target.map | Hash $node | { $node['certname'] }
+  out::message("pe_target_certname is ${pe_target_certname}")
 }
 #lint:endignore
