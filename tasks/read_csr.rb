@@ -35,4 +35,5 @@ csr_files.each do |file|
   trusted_facts.each do |k, v|
     puts "#{k}: #{v}"
   end
+  puts
 end
