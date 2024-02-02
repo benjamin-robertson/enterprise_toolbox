@@ -33,6 +33,6 @@ plan enterprise_toolbox::read_cert_requests (
 
   $task_results = run_task('enterprise_toolbox::read_csr', $pe_target_certname, { '_catch_errors' => true })
 
-  out::message("${$task_results} results")
+  out::message("${$task_results[0].message} results")
 }
 #lint:endignore
