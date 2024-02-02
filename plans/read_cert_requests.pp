@@ -28,8 +28,11 @@ plan enterprise_toolbox::read_cert_requests (
     # We found a single primary server :)
     $pe_target = $pe_status_results
   }
-  out::message("pe_target is ${pe_target}")
   $pe_target_certname = $pe_target.map | Hash $node | { $node['certname'] }
   out::message("pe_target_certname is ${pe_target_certname}")
+
+  $task_results = run_task('enterprise_toolbox::read_csr', $pe_target_certname, { '_catch_errors' => true })
+
+  out::message("${$task_results} results")
 }
 #lint:endignore
