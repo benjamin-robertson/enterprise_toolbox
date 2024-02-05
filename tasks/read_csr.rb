@@ -1,6 +1,7 @@
 #!/opt/puppetlabs/puppet/bin/ruby
 
 require 'openssl'
+require 'json'
 
 def get_extensions(certificate)
   # set all known trusted facts
@@ -25,7 +26,9 @@ def get_extensions(certificate)
   trusted_facts
 end
 
-csr_path = '/etc/puppetlabs/puppetserver/ca/requests'
+# Read paramerters from STDIN
+params = JSON.parse(STDIN.read)
+csr_path = params['csr_path']
 csr_files = Dir.entries(csr_path)
 
 csr_files.each do |file|

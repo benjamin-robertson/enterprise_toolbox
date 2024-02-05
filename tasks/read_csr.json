@@ -3,5 +3,9 @@
   "supports_noop": false,
   "description": "A short description of this task",
   "parameters": {
+    "csr_path": {
+      "description": "Path to Puppet server CSR directory",
+      "type": "String"
+    }
   }
 }

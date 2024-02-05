@@ -12,7 +12,8 @@
 #
 # @param node_name Specify a single node to return results for. 
 plan enterprise_toolbox::read_cert_requests (
-  Optional[String] $node_name = undef,
+  Enum['/etc/puppetlabs/puppetserver/ca/requests','/etc/puppetlabs/puppet/ssl/carequests'] $csr_path  = '/etc/puppetlabs/puppetserver/ca/requests',
+  Optional[String]                                                                         $node_name = undef,
 ) {
   # We need to get the primary server. Check pe_status_check fact. otherwise fall back to built in fact.
   $pe_status_results = puppetdb_query('inventory[certname] { facts.pe_status_check_role = "primary" }')
