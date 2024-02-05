@@ -30,6 +30,7 @@ end
 params = JSON.parse(STDIN.read)
 csr_path = params['csr_path']
 csr_files = Dir.entries(csr_path)
+certname_to_return = params['certname']
 
 csr_files.each do |file|
   unless file.include?('.pem') then next end
@@ -37,6 +38,9 @@ csr_files.each do |file|
   trusted_facts = get_extensions(certificate)
   unless trusted_facts then next end
 
+  if certname_to_return.length >= 2
+    unless file.include?($certname_to_return) then next end
+  end
   # Print out request details
   puts "Certname: #{file}"
   puts '------------------------------------------------------------------------'
