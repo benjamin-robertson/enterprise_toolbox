@@ -5,6 +5,8 @@
   "summary": "Enterprise toolbox contains useful tools for working with Puppet Enterprise.",
   "license": "Apache-2.0",
   "source": "https://github.com/benjamin-robertson/enterprise_toolbox",
+  "project_page": "https://github.com/benjamin-robertson/enterprise_toolbox",
+  "issues_url": "https://github.com/benjamin-robertson/enterprise_toolbox/issues",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
