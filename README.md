@@ -1,10 +1,8 @@
 # enterprise_toolbox
 
-Welcome to your new module. A short overview of the generated parts can be found
-in the [PDK documentation][1].
+Enterprise toolbox contains useful tools for working with Puppet Enterprise.
 
-The README template below provides a starting point with details about what
-information to include in your README.
+Currently I have a few discrete modules for these tools, 
 
 ## Table of Contents
 

@@ -21,7 +21,7 @@ plan enterprise_toolbox::read_cert_requests (
   if $pe_status_results.length != 1 {
     # check with built-in puppet_enterprise_role fact
     $pe_role_results = puppetdb_query('inventory[certname] { facts.puppet_enterprise_role = "Primary" }')
-    if $pe_role_results != 1 {
+    if $pe_role_results.length != 1 {
       fail("Could not identify the primary server. Confirm the puppet_enterprise_role fact or pe_status_check_role fact is working correctly. Results: ${pe_role_results}")
     } else {
       $pe_target = $pe_role_results
