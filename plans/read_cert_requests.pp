@@ -32,7 +32,7 @@ plan enterprise_toolbox::read_cert_requests (
   $pe_target_certname = $pe_target.map | Hash $node | { $node['certname'] }
   out::message("pe_target_certname is ${pe_target_certname}")
 
-  $task_results = run_task('enterprise_toolbox::read_csr', $pe_target_certname, { '_catch_errors' => true })
+  $task_results = run_task('enterprise_toolbox::read_csr', $pe_target_certname, { 'csr_path' => $csr_path, '_catch_errors' => true })
 
   # out::message("${$task_results[0].message}")
 
