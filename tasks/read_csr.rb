@@ -38,7 +38,7 @@ csr_files.each do |file|
   trusted_facts = get_extensions(certificate)
   unless trusted_facts then next end
 
-  if certname_to_return.length >= 2
+  if certname_to_return
     unless file.include?(certname_to_return) then next end
   end
   # Print out request details

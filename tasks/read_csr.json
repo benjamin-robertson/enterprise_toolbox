@@ -9,7 +9,7 @@
     },
     "node_name": {
       "description": "node_name of certificate to return",
-      "type": "String"
+      "type": "Optional[String]"
     }
   }
 }
