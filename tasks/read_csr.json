@@ -7,8 +7,8 @@
       "description": "Path to Puppet server CSR directory",
       "type": "String"
     },
-    "certname": {
-      "description": "Certname of certificate to return",
+    "node_name": {
+      "description": "node_name of certificate to return",
       "type": "String"
     }
   }

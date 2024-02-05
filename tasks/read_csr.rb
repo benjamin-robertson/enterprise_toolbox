@@ -30,7 +30,7 @@ end
 params = JSON.parse(STDIN.read)
 csr_path = params['csr_path']
 csr_files = Dir.entries(csr_path)
-certname_to_return = params['certname']
+certname_to_return = params['node_name']
 
 csr_files.each do |file|
   unless file.include?('.pem') then next end
