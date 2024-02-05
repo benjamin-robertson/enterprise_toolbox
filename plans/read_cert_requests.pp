@@ -17,7 +17,7 @@ plan enterprise_toolbox::read_cert_requests (
   Optional[String]                                                                          $node_name = undef,
 ) {
   # We need to get the primary server. Check pe_status_check fact. otherwise fall back to built in fact.
-  $pe_status_results = puppetdb_query('inventory[certname] { facts.pe_status_check_role = "primary" }')
+  $pe_status_results = puppetdb_query('inventory[certname] { facts.pe_status_check_ro1le = "primary" }')
   if $pe_status_results.length != 1 {
     # check with built-in puppet_enterprise_role fact
     $pe_role_results = puppetdb_query('inventory[certname] { facts.puppet_enterprise_role = "Primary" }')
