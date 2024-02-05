@@ -16,7 +16,7 @@ Enterprise toolbox contains useful tools for working with Puppet Enterprise. The
 
 Presently, enterprise_toolbox contains a Puppet plan to read certificate extensions on unsigned certificates.
 
-Currently I have a few discrete modules containing a single purpose tool tool. The plan is consolidate these into this single module. 
+I have a few discrete modules containing a single tool. The plan is consolidate these into this single module.
 
 * https://forge.puppet.com/modules/benjaminrobertson/update_trusted_facts
 * https://forge.puppet.com/modules/benjaminrobertson/migrate_nodes/readme
@@ -25,9 +25,9 @@ Currently I have a few discrete modules containing a single purpose tool tool. T
 
 ### What enterprise_toolbox affects
 
-Enterprise_toolbox presently does not make any configuration changes. 
+Enterprise_toolbox presently does not make any configuration changes.
 
-The fact `puppet_enterprise_role` is install to determine which host is the primary server if the `pe_status_check_role` fact is not available. 
+The fact `puppet_enterprise_role` is installed to determine which host is the primary server if the `pe_status_check_role` fact is not available. 
 
 ### Beginning with enterprise_toolbox
 

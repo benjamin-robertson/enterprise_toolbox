@@ -2,7 +2,7 @@
   "name": "benjaminrobertson-enterprise_toolbox",
   "version": "0.1.0",
   "author": "benjaminrobertson",
-  "summary": "Enterprise toolbox contains useful tools for working with Puppet Enterprise. These tools fill in the gaps where Puppet Enterprise does not natively provide easy solutions. ",
+  "summary": "Enterprise toolbox contains useful tools for working with Puppet Enterprise.",
   "license": "Apache-2.0",
   "source": "https://github.com/benjamin-robertson/enterprise_toolbox",
   "dependencies": [
