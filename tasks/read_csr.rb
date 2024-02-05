@@ -14,7 +14,11 @@ def get_extensions(certificate)
   end
 
   attribute = csr.attributes.find { |a| a.oid == 'extReq' }
-  sequence = attribute.value
+  begin
+    sequence = attribute.value
+  rescue
+    return {}
+  end
   trusted_facts = {}
 
   sequence.value.each do |element|
