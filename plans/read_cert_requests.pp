@@ -1,14 +1,6 @@
-# @summary PE plan to update trusted facts on a certificate via Puppet enterprise console, while preserving existing trusted facts.
+# @summary PE plan to read the trusted extensions on unsigned certificates.
 #
 # lint:ignore:140chars lint:ignore:strict_indent
-# 
-# This plans allows for the easy modification of trusted facts on already deployed nodes via the Puppet Enterprise console.
-# It will preserve the existing trusted facts by reading the existing certificate and merging any proposed changes over existing. This behaviour can be changed by setting the preserve_existing_facts parameter to false
-# We require the Puppet Primary to be specified when runing the plan due to limitations of running plans in orchestor. 
-#
-# To learn more about Puppet plans, see documentation:
-# - http://pup.pt/bolt-puppet-plans
-# - https://www.puppet.com/docs/pe/2021.7/plans_limitations.html
 #
 # @param csr_path Specify Puppet Server ca path, default for Puppet 7.0 and later.
 # @param node_name Specify a single node to return results for. 

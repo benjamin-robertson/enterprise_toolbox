@@ -1,15 +1,12 @@
 # enterprise_toolbox
 
-Enterprise toolbox contains useful tools for working with Puppet Enterprise.
-
-Currently I have a few discrete modules for these tools, 
+Enterprise toolbox contains useful tools for working with Puppet Enterprise. These tools fill in the gaps where Puppet Enterprise does not natively provide easy solutions. 
 
 ## Table of Contents
 
 1. [Description](#description)
 1. [Setup - The basics of getting started with enterprise_toolbox](#setup)
     * [What enterprise_toolbox affects](#what-enterprise_toolbox-affects)
-    * [Setup requirements](#setup-requirements)
     * [Beginning with enterprise_toolbox](#beginning-with-enterprise_toolbox)
 1. [Usage - Configuration options and additional functionality](#usage)
 1. [Limitations - OS compatibility, etc.](#limitations)
@@ -17,99 +14,44 @@ Currently I have a few discrete modules for these tools,
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your
-module does and what kind of problems users can solve with it.
+Presently, enterprise_toolbox contains a Puppet plan to read certificate extensions on unsigned certificates.
 
-This should be a fairly short description helps the user decide if your module
-is what they want.
+Currently I have a few discrete modules containing a single purpose tool tool. The plan is consolidate these into this single module. 
+
+* https://forge.puppet.com/modules/benjaminrobertson/update_trusted_facts
+* https://forge.puppet.com/modules/benjaminrobertson/migrate_nodes/readme
 
 ## Setup
 
-### What enterprise_toolbox affects **OPTIONAL**
+### What enterprise_toolbox affects
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+Enterprise_toolbox presently does not make any configuration changes. 
 
-If there's more that they should know about, though, this is the place to
-mention:
-
-* Files, packages, services, or operations that the module will alter, impact,
-  or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section here.
+The fact `puppet_enterprise_role` is install to determine which host is the primary server if the `pe_status_check_role` fact is not available. 
 
 ### Beginning with enterprise_toolbox
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most basic
-use of the module.
+Include module in your Puppetfile.
+
+`mod 'benjaminrobertson-enterprise_toolbox'`
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your
-users how to use your module to solve problems, and be sure to include code
-examples. Include three to five examples of the most important or common tasks a
-user can accomplish with your module. Show users how to accomplish more complex
-tasks that involve different types, classes, and functions working in tandem.
+Run the plan **enterprise_toolbox::read_cert_requests** from the Puppet Enterprise console.
 
-## Reference
-
-This section is deprecated. Instead, add reference information to your code as
-Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your
-module. For details on how to add code comments and generate documentation with
-Strings, see the [Puppet Strings documentation][2] and [style guide][3].
-
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the
-root of your module directory and list out each of your module's classes,
-defined types, facts, functions, Puppet tasks, task plans, and resource types
-and providers, along with the parameters for each.
-
-For each element (class, defined type, function, and so on), list:
-
-* The data type, if applicable.
-* A description of what the element does.
-* Valid values, if the data type doesn't make it obvious.
-* Default value, if any.
-
-For example:
-
-```
-### `pet::cat`
-
-#### Parameters
-
-##### `meow`
-
-Enables vocalization in your cat. Valid options: 'string'.
-
-Default: 'medium-loud'.
-```
+**Optional parameters**
+- csr_path (String) - Path to certificate request directory. Defaults to Puppet 7.0 > directory [For more info](https://www.puppet.com/docs/pe/2021.7/osp/server/release_notes#puppet-server-700)
+- node_name (Sting) - Filter by node name. Can do a partial match. Can match multiple nodes. 
 
 ## Limitations
 
-In the Limitations section, list any incompatibilities, known issues, or other
-warnings.
+* Developed on Puppet Enterprise 2021.7.6
+* Expected to work with all modern versions of Puppet.
 
 ## Development
 
-In the Development section, tell other users the ground rules for contributing
-to your project and how they should submit their work.
+If you find any issues with this module, please log them in the issues register of the GitHub project. [Issues][1]
 
-## Release Notes/Contributors/Etc. **Optional**
+PR glady accepted :)
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel are
-necessary or important to include here. Please use the `##` header.
-
-[1]: https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
-[2]: https://puppet.com/docs/puppet/latest/puppet_strings.html
-[3]: https://puppet.com/docs/puppet/latest/puppet_strings_style.html
+[1]: https://github.com/benjamin-robertson/enterprise_toolbox/issues
