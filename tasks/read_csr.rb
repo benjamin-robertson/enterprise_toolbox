@@ -39,7 +39,7 @@ csr_files.each do |file|
   unless trusted_facts then next end
 
   if certname_to_return.length >= 2
-    unless file.include?($certname_to_return) then next end
+    unless file.include?(certname_to_return) then next end
   end
   # Print out request details
   puts "Certname: #{file}"

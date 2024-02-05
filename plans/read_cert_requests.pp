@@ -10,10 +10,11 @@
 # - http://pup.pt/bolt-puppet-plans
 # - https://www.puppet.com/docs/pe/2021.7/plans_limitations.html
 #
+# @param csr_path Specify Puppet Server ca path, default for Puppet 7.0 and later.
 # @param node_name Specify a single node to return results for. 
 plan enterprise_toolbox::read_cert_requests (
-  Enum['/etc/puppetlabs/puppetserver/ca/requests','/etc/puppetlabs/puppet/ssl/carequests'] $csr_path  = '/etc/puppetlabs/puppetserver/ca/requests',
-  Optional[String]                                                                         $node_name = undef,
+  Enum['/etc/puppetlabs/puppetserver/ca/requests','/etc/puppetlabs/puppet/ssl/ca/requests'] $csr_path  = '/etc/puppetlabs/puppetserver/ca/requests',
+  Optional[String]                                                                          $node_name = undef,
 ) {
   # We need to get the primary server. Check pe_status_check fact. otherwise fall back to built in fact.
   $pe_status_results = puppetdb_query('inventory[certname] { facts.pe_status_check_role = "primary" }')
