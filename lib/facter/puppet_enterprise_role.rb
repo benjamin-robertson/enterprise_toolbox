@@ -5,7 +5,7 @@ require 'json'
 require 'socket'
 
 Facter.add(:puppet_enterprise_role) do
-  # confine kernel: 'Linux'
+  # confine kernel: 'Linux' # disable as this causing issues with unit tests on osx.
   setcode do
     def get_puppet_role
       output, status = Open3.capture2('puppet infrastructure status')
