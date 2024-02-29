@@ -5,11 +5,11 @@ require 'json'
 require 'socket'
 
 Facter.add(:puppet_enterprise_role) do
-  confine kernel: 'Linux'
+  # confine kernel: 'Linux'
   setcode do
     def get_puppet_role
       output, status = Open3.capture2('puppet infrastructure status')
-      hostname = Facter.value(:hostname).downcase
+      hostname = Socket.gethostname
       results = {}
 
       # Populate the hash with value for Primary and Replica
@@ -37,12 +37,10 @@ Facter.add(:puppet_enterprise_role) do
 
     # confirm this is a pe
     if Facter.value(:pe_version).to_s.empty?
-      # nil
-      'cat'
+      nil
     else
       # we are running on PE node, check role.
-      # get_puppet_role
-      'dog'
+      get_puppet_role
     end
   end
 end
