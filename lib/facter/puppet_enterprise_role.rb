@@ -37,10 +37,12 @@ Facter.add(:puppet_enterprise_role) do
 
     # confirm this is a pe
     if Facter.value(:pe_version).to_s.empty?
-      nil
+      # nil
+      'cat'
     else
       # we are running on PE node, check role.
-      get_puppet_role
+      # get_puppet_role
+      'dog'
     end
   end
 end

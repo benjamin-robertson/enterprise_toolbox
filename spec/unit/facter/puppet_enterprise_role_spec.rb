@@ -55,7 +55,7 @@ describe :puppet_enterprise_role, type: :fact do
     # allow(Socket).to receive(:gethostname).with(:value).and_return('ip-10-8-0-168.ap-southeast-2.compute.internal')
   end
 
-  describe "primary server check" do
+  describe 'primary server check' do
     let(:hostname) { 'ip-10-8-0-168.ap-southeast-2.compute.internal' }
 
     it 'returns a value' do
