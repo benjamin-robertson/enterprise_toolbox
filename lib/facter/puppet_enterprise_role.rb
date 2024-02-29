@@ -9,7 +9,7 @@ Facter.add(:puppet_enterprise_role) do
   setcode do
     # confirm this is a pe
     if Facter.value(:pe_version).to_s.empty?
-      return "doge"
+      return 'doge'
     end
 
     def get_puppet_role
