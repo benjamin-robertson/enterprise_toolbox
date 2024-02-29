@@ -38,25 +38,28 @@ describe :puppet_enterprise_role, type: :fact do
   before :each do
     # perform any action that should be run before every test
     Facter.clear
-    Facter.add(:pe_version) {}
-    allow(Facter.fact(:pe_version)).to receive(:value).and_return('2021.8.4')
-    allow(Open3).to receive(:popen3).with('puppet infrastructure status').and_yield("Notice: Contacting services for status information...
+    # Facter.add(:pe_version) {}
+    # allow(Facter.fact(:pe_version)).to receive(:value).and_return('2021.8.4')
+    # allow(Open3).to receive(:capture2).with('puppet infrastructure status').and_yield("Notice: Contacting services for status information...
 
-      Primary: ip-10-8-0-168.ap-southeast-2.compute.internal
-        Activity Service: Running, checked via https://ip-10-8-0-168.ap-southeast-2.compute.internal:4433/status/v1/services
+    #   Primary: ip-10-8-0-168.ap-southeast-2.compute.internal
+    #     Activity Service: Running, checked via https://ip-10-8-0-168.ap-southeast-2.compute.internal:4433/status/v1/services
       
-      Replica: ip-10-8-0-142.ap-southeast-2.compute.internal
-        Activity Service: Running, checked via https://ip-10-8-0-142.ap-southeast-2.compute.internal:4433/status/v1/services
+    #   Replica: ip-10-8-0-142.ap-southeast-2.compute.internal
+    #     Activity Service: Running, checked via https://ip-10-8-0-142.ap-southeast-2.compute.internal:4433/status/v1/services
       
-      Compiler: ip-10-8-0-152.ap-southeast-2.compute.internal
-        File Sync Client Service: Running, checked via https://ip-10-8-0-152.ap-southeast-2.compute.internal:8140/status/v1/services
+    #   Compiler: ip-10-8-0-152.ap-southeast-2.compute.internal
+    #     File Sync Client Service: Running, checked via https://ip-10-8-0-152.ap-southeast-2.compute.internal:8140/status/v1/services
       
-      Status at 2024-02-05 04:41:29 +0000")
-    allow(Socket).to receive(:value).with(:gethostname).and_return('ip-10-8-0-168.ap-southeast-2.compute.internal')
-    # allow(Facter.fact(:ec2_metadata)).to receive(:value).and_return({'42'})
+    #   Status at 2024-02-05 04:41:29 +0000")
+    # allow(Socket).to receive(:gethostname).with(:value).and_return('ip-10-8-0-168.ap-southeast-2.compute.internal')
   end
 
-  it 'returns a value' do
-    expect(fact.value).to eq('Primary')
+  describe "primary server check" do
+    let(:hostname) { 'ip-10-8-0-168.ap-southeast-2.compute.internal' }
+
+    it 'returns a value' do
+      expect(fact.value).to eq('Primary')
+    end
   end
 end

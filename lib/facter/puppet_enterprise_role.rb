@@ -9,7 +9,7 @@ Facter.add(:puppet_enterprise_role) do
   setcode do
     def get_puppet_role
       output, status = Open3.capture2('puppet infrastructure status')
-      hostname = Socket.gethostname
+      hostname = Facter.value(:hostname).downcase
       results = {}
 
       # Populate the hash with value for Primary and Replica
