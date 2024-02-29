@@ -7,12 +7,6 @@ require 'socket'
 Facter.add(:puppet_enterprise_role) do
   confine kernel: 'Linux'
   setcode do
-    # confirm this is a pe
-    if Facter.value(:pe_version).to_s.empty?
-      puts 'yo i am here'
-      return 'doge'
-    end
-
     def get_puppet_role
       output, status = Open3.capture2('puppet infrastructure status')
       hostname = Socket.gethostname
@@ -41,6 +35,12 @@ Facter.add(:puppet_enterprise_role) do
       'Error getting Puppet Infra Role'
     end
 
-    get_puppet_role
+    # confirm this is a pe
+    if Facter.value(:pe_version).to_s.empty?
+      'agent'
+    else
+      # we are running on PE node, check role.
+      get_puppet_role
+    end
   end
 end
