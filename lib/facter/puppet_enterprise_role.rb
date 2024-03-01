@@ -5,13 +5,8 @@ require 'json'
 require 'socket'
 
 Facter.add(:puppet_enterprise_role) do
-  confine kernel: 'Linux'
+  # confine kernel: 'Linux' # disable as this causing issues with unit tests on osx.
   setcode do
-    # confirm this is a pe
-    if Facter.value(:pe_version).to_s.empty?
-      return nil
-    end
-
     def get_puppet_role
       output, status = Open3.capture2('puppet infrastructure status')
       hostname = Socket.gethostname
@@ -40,6 +35,12 @@ Facter.add(:puppet_enterprise_role) do
       'Error getting Puppet Infra Role'
     end
 
-    get_puppet_role
+    # confirm this is a pe
+    if Facter.value(:pe_version).to_s.empty?
+      nil
+    else
+      # we are running on PE node, check role.
+      get_puppet_role
+    end
   end
 end

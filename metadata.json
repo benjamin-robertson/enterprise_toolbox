@@ -1,6 +1,6 @@
 {
   "name": "benjaminrobertson-enterprise_toolbox",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "benjaminrobertson",
   "summary": "Enterprise toolbox contains useful tools for working with Puppet Enterprise.",
   "license": "Apache-2.0",
