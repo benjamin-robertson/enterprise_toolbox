@@ -51,10 +51,9 @@ def get_pp_files(files, folder, pattern)
     end
 end
 
-files = []
-get_pp_files(files, "/etc/puppetlabs/code/environments/#{environment}/*", pattern)
-
-# puts files
+def print_message(file, fact, line)
+    puts "File: #{file} contains legacy fact #{fact} on line #{line}"
+end
 
 def check_file(file)
     handle    = File.open(file, 'r')
@@ -68,36 +67,39 @@ def check_file(file)
             if file.match?(/\.pp$|\.epp$|\.erb$/)
                 # check epp pp and erb
                 if line.match?(/[\$\@]facts\[\'#{easy}\'\]/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 elsif line.match?(/[\$\@]#{easy}[ %={]/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 elsif line.match?(/[\$\@]\:\:#{easy}[ %={]/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 end
             elsif file.match?(/\.rb$/)
                 # check rb only
                 if line.match?(/Factor.value\(\'#{easy}\'\)/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 elsif line.match?(/confine #{easy}\:/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 end
             elsif file.match?(/\.yaml$/)
                 if line.match?(/\%\{\:\:#{easy}\}/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 elsif line.match?(/\%\{#{easy}\}/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 elsif line.match?(/\%\{facts.#{easy}\}/)
-                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                    print_message(file, easy, count)
                 end
             end
         end
         REGEX_FACTS.each do | regex |
             if line.match?(regex)
-                puts "File: #{file} contains legacy fact #{regex} on line #{count}"
+                print_message(file, regex, count)
             end
         end
     end
 end
+
+files = []
+get_pp_files(files, "/etc/puppetlabs/code/environments/#{environment}/*", pattern)
 
 files.each do | file |
     check_file(file)
