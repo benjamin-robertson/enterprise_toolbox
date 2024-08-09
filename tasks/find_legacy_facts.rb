@@ -65,11 +65,11 @@ def check_file(file)
         next if line.match?(/^#/)
         # check for easy facts.
         LEGACY_FACTS.each do | easy |
-            # check epp pp and erb
-            if file.match?(%r{\.pp$|\.epp$|\.erb$})
-                if line.match?(%r{[\$\@]facts\[\'#{easy}\'\]})
+            if file.match?(/\.pp$|\.epp$|\.erb$/)
+                # check epp pp and erb
+                if line.match?(/[\$\@]facts\[\'#{easy}\'\]/)
                     puts "File: #{file} contains legacy fact #{easy} on line #{count}"
-                elsif line.match?(%r{[\$\@]#{easy}[ %={]})
+                elsif line.match?(/[\$\@]#{easy}[ %={]/)
                     puts "File: #{file} contains legacy fact #{easy} on line #{count}"
                 elsif line.match?(/[\$\@]\:\:#{easy}[ %={]/)
                     puts "File: #{file} contains legacy fact #{easy} on line #{count}"
@@ -82,6 +82,13 @@ def check_file(file)
                     puts "File: #{file} contains legacy fact #{easy} on line #{count}"
                 end
             elsif file.match?(/\.yaml$/)
+                if line.match?(/\%\{\:\:#{easy}\}/)
+                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                elsif line.match?(/\%\{#{easy}\}/)
+                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                elsif line.match?(/\%\{facts.#{easy}\}/)
+                    puts "File: #{file} contains legacy fact #{easy} on line #{count}"
+                end
             end
         end
         REGEX_FACTS.each do | regex |
@@ -96,8 +103,3 @@ files.each do | file |
     check_file(file)
 end
 
-# Facter.value('lsbdistid')
-# confine kernel:
-
-
-# hiera?
