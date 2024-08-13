@@ -10,7 +10,7 @@
     "check_ruby":{
       "description": "Whether to check ruby files for legacy facts",
       "type": "Boolean",
-      "default": "false"
+      "default": false
     }
   }
 }
