@@ -5,7 +5,7 @@
   "parameters": {
     "environment":{
       "description": "Code environment to scan.",
-      "type": "Pattern[/\A[a-z0-9_]+\Z/]"
+      "type": "String[1]"
     },
     "check_ruby":{
       "description": "Whether to check ruby files for legacy facts",
