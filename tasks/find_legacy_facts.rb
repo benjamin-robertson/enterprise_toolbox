@@ -31,7 +31,8 @@ LEGACY_FACTS = ['memoryfree_mb', 'memorysize_mb', 'swapfree_mb',
                 'system32', 'uptime', 'uptime_days', 'uptime_hours',
                 'uptime_seconds', 'uuid', 'xendomains', 'zonename'].freeze
 
-# Params here
+# Read paramerters from STDIN
+params = JSON.parse(STDIN.read)
 check_ruby = params['check_ruby']
 environment = params['environment']
 pattern = [%r{\.pp$}, %r{\.epp$}, %r{\.erb$}, %r{\.yaml$}]
