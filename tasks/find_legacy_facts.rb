@@ -1,5 +1,7 @@
 #!/opt/puppetlabs/puppet/bin/ruby
 
+require 'json'
+
 # facts defs
 
 REGEX_FACTS = [%r{^blockdevice_(?<devicename>.*)_(?<attribute>model|size|vendor)$},
