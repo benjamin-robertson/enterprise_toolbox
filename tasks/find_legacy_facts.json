@@ -1,7 +1,16 @@
 {
   "puppet_task_version": 1,
   "supports_noop": false,
-  "description": "A short description of this task",
+  "description": "Puppet task which scans entire code environments for legacy facts.",
   "parameters": {
+    "environment":{
+      "description": "Code environment to scan.",
+      "type": "Pattern[/\A[a-z0-9_]+\Z/]"
+    },
+    "check_ruby":{
+      "description": "Whether to check ruby files for legacy facts",
+      "type": "Boolean",
+      "default": "false"
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "puppet_task_version": 1,
   "supports_noop": false,
-  "description": "A short description of this task",
+  "description": "Read CSR attributes from an unsigned certificate.",
   "parameters": {
     "csr_path": {
       "description": "Path to Puppet server CSR directory",
